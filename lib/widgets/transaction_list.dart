@@ -13,59 +13,56 @@ class TransactionList extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: (context, index) {
           return Card(
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.purple,
-                        width: 2,
-                      ),
+            child: Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.purple,
+                      width: 2,
                     ),
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      "\$${transactions[index].amount}",
+                  ),
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "\$${transactions[index].amount.toStringAsFixed(2)}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.purple,
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      transactions[index].title,
                       style: TextStyle(
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.purple,
                       ),
                     ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        transactions[index].title,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      //DateFormat().format(tx.date),
+                      DateFormat.yMMMd().format(transactions[index].date),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
                       ),
-                      Text(
-                        //DateFormat().format(tx.date),
-                        DateFormat.yMMMd().format(transactions[index].date),
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          
-          
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
         },
-        //number of elements in the list so that Flutter get to know 
-        //that the anonymous function passed to the itemBuilder 
-        //needs to be executed as many times as 
+        //number of elements in the list so that Flutter get to know
+        //that the anonymous function passed to the itemBuilder
+        //needs to be executed as many times as
         //the length of the list of transactions
         itemCount: transactions.length,
-        //shows each element in the transaction list as a Card
-        ),
+      ),
     );
   }
 }
