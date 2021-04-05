@@ -10,10 +10,9 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: ListView(
-          //shows each element in the transaction list as a Card
-          children: transactions.map((tx) {
-            return Card(
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return Card(
               child: Row(
                 children: [
                   Container(
@@ -26,7 +25,7 @@ class TransactionList extends StatelessWidget {
                     ),
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      "\$${tx.amount}",
+                      "\$${transactions[index].amount}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -38,7 +37,7 @@ class TransactionList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        tx.title,
+                        transactions[index].title,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -46,7 +45,7 @@ class TransactionList extends StatelessWidget {
                       ),
                       Text(
                         //DateFormat().format(tx.date),
-                        DateFormat.yMMMd().format(tx.date),
+                        DateFormat.yMMMd().format(transactions[index].date),
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
@@ -57,7 +56,15 @@ class TransactionList extends StatelessWidget {
                 ],
               ),
             );
-          }).toList(),
+          
+          
+        },
+        //number of elements in the list so that Flutter get to know 
+        //that the anonymous function passed to the itemBuilder 
+        //needs to be executed as many times as 
+        //the length of the list of transactions
+        itemCount: transactions.length,
+        //shows each element in the transaction list as a Card
         ),
     );
   }
