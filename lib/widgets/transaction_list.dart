@@ -5,14 +5,15 @@ import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
   
-
+  final List<Transaction> transactions;
+  TransactionList(this.transactions);
   
 
   @override
   Widget build(BuildContext context) {
       return  Column(
             //shows each element in the transaction list as a Card
-            children: _userTransactions.map((tx) {
+            children: transactions.map((tx) {
               return Card(
                 child: Row(
                   children: [

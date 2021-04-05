@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './widgets/new_transaction.dart';
-import './widgets/transaction_list.dart';
+import 'package:flutter_expenses_app/widgets/user_transactions.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -46,6 +46,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
+          UserTransactions(),
           //moved to UserTransactions to manage them there
           //NewTransaction(),
           //TransactionList(),

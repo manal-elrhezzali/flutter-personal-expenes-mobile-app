@@ -35,6 +35,9 @@ class NewTransaction extends StatelessWidget {
                   FlatButton(
                     onPressed: () {
                       print(titleController.text);
+
+                      //TODO : we need to trigger the _addTransaction method 
+
                       //print(titleInput);
                       //print(amountInput);
                     },
