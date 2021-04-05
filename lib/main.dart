@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_expenses_app/widgets/transaction_list.dart';
-import './models/transaction.dart';
+import './widgets/new_transaction.dart';
+import './widgets/transaction_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,8 +23,8 @@ class MyHomePage extends StatelessWidget {
   //String titleInput;
   //String amountInput;
   //
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+  //final titleController = TextEditingController();
+  //final amountController = TextEditingController();
 
 //  final List<Transaction> transactions = [];
 
@@ -46,44 +46,9 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Card(
-            elevation: 5,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  TextField(
-                    decoration: InputDecoration(labelText: "Title"),
-                    //we can omit the type String cuz Dart will infer it
-
-                    //instead of registering the input manually on each key stroke
-                    //Flutter provides us with an alternative that allows us to listne to each key stroke and get the finished value once we're done
-                    controller: titleController,
-
-                    //onChanged: (String val) {
-                    //  titleInput = val;
-                    //},
-                  ),
-                  TextField(
-                    controller: amountController,
-                    decoration: InputDecoration(labelText: "Amount"),
-                    //onChanged: (val) => amountInput = val,
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      print(titleController.text);
-                      //print(titleInput);
-                      //print(amountInput);
-                    },
-                    child: Text("Add Transaction"),
-                    textColor: Colors.purple,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          TransactionList(),
+          //moved to UserTransactions to manage them there
+          //NewTransaction(),
+          //TransactionList(),
         ],
       ),
     );
