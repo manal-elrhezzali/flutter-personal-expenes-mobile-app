@@ -10,7 +10,10 @@ class ChartBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('\$${spendingAmount.toStringAsFixed(0)}'),
+        //forces its child to fit into its space by shrinking
+        FittedBox(
+          child: Text('\$${spendingAmount.toStringAsFixed(0)}'),
+        ),
         SizedBox(
           height: 4,
         ),
