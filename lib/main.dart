@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './widgets/chart.dart';
 import 'package:flutter_expenses_app/widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
 import 'models/transaction.dart';
@@ -65,6 +66,21 @@ class _MyHomePageState extends State<MyHomePage> {
     // ),
   ];
 
+  // List of transactions that happened in the last week
+  // where is a method which Dart offers on List, w
+  // here allows u to run a function on every item in the List
+  // and if that function returns true
+  // the item is kept in a newly returned List
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
@@ -110,14 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              //width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text("A CHART goes here!"),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
             //moved to UserTransactions to manage them there
             //NewTransaction(),
