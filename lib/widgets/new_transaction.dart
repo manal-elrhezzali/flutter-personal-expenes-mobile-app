@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   final Function addTx;
 
-  final TextEditingController titleController = TextEditingController();
-  final amountController = TextEditingController();
 
   NewTransaction(this.addTx);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final TextEditingController titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   void submitData() {
     final enteredTitle = titleController.text;
@@ -14,11 +21,14 @@ class NewTransaction extends StatelessWidget {
     if(enteredAmount <= 0 || enteredTitle.isEmpty ){
       return;
     }
-    //calls the _addNewTransaction method
-    addTx(
-      titleController.text,
-      double.parse(amountController.text),
+    //calls the _addTx method of this state's class widget
+    widget.addTx(
+      enteredTitle,
+      enteredAmount,
     );
+    //context is a property defined class wide in the State class even though we never defined a propertty named context
+    Navigator.of(context).pop();
+
   }
 
   @override
@@ -36,6 +46,7 @@ class NewTransaction extends StatelessWidget {
               //instead of registering the input manually on each key stroke
               //Flutter provides us with an alternative that allows us to listne to each key stroke and get the finished value once we're done
               controller: titleController,
+            
               //onChanged: (String val) {
               //  titleInput = val;
               //},
