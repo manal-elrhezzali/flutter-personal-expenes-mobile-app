@@ -52,7 +52,7 @@ class Chart extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children:
               //map takes a function that executes on each
-              //groupedTransactionValue slist items and returns a widget
+              //groupedTransactionValues list items and returns a widget
               groupedTransactionValues.map((data) {
             // return Text(data["day"] + " : " + data["amount"].toString(),);
             return Flexible(

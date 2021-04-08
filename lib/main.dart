@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import './widgets/chart.dart';
-import 'package:flutter_expenses_app/widgets/transaction_list.dart';
+import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
-import 'models/transaction.dart';
+import './models/transaction.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(MyApp());
 }
 
@@ -12,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Personal Expenses',
+      title: 'Personal Expenses', 
       theme: ThemeData(
         // errorColor: Colors.red, //the errorColor is red by default
         primarySwatch: Colors.purple,
