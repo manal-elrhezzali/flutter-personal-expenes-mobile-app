@@ -16,8 +16,8 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime _selectedDate;
 
   void _submitData() {
-    if(_amountController.text.isEmpty) {
-      return;      
+    if (_amountController.text.isEmpty) {
+      return;
     }
     final enteredTitle = _titleController.text;
     final enteredAmount = double.parse(_amountController.text);
@@ -53,67 +53,74 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: "Title"),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: "Title"),
 
-              //instead of registering the input manually on each key stroke
-              //Flutter provides us with an alternative that allows us to listne to each key stroke and get the finished value once we're done
-              controller: _titleController,
+                //instead of registering the input manually on each key stroke
+                //Flutter provides us with an alternative that allows us to listne to each key stroke and get the finished value once we're done
+                controller: _titleController,
 
-              //onChanged: (String val) {
-              //  titleInput = val;
-              //},
-              onSubmitted: (_) =>
-                  _submitData(), // <=> onSubmitted: (String val) => submitData,
-            ),
-            TextField(
-              controller: _amountController,
-              decoration: InputDecoration(labelText: "Amount"),
-              //this controlls the keyboard that shows up when the user taps on the amount TextField
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              //it's a convention to use underscore instead of a meaningful name
-              //to indicate that we take a parameter but we won't use it
-              onSubmitted: (_) =>
-                  _submitData(), // <=> onSubmitted: (String val) => submitData,
-
-              //onChanged: (val) => amountInput = val,
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? "No date chosen!"
-                          : "Picked Date: ${DateFormat.yMd().format(_selectedDate)}",
-                    ),
-                  ),
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    onPressed: _presentDatePicker,
-                    child: Text(
-                      "Choose Date",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
+                //onChanged: (String val) {
+                //  titleInput = val;
+                //},
+                onSubmitted: (_) =>
+                    _submitData(), // <=> onSubmitted: (String val) => submitData,
               ),
-            ),
-            RaisedButton(
-              onPressed: _submitData,
-              child: Text("Add Transaction"),
-              color: Theme.of(context).primaryColor,
-              textColor: Theme.of(context).textTheme.button.color,
-            ),
-          ],
+              TextField(
+                controller: _amountController,
+                decoration: InputDecoration(labelText: "Amount"),
+                //this controlls the keyboard that shows up when the user taps on the amount TextField
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                //it's a convention to use underscore instead of a meaningful name
+                //to indicate that we take a parameter but we won't use it
+                onSubmitted: (_) =>
+                    _submitData(), // <=> onSubmitted: (String val) => submitData,
+
+                //onChanged: (val) => amountInput = val,
+              ),
+              Container(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? "No date chosen!"
+                            : "Picked Date: ${DateFormat.yMd().format(_selectedDate)}",
+                      ),
+                    ),
+                    FlatButton(
+                      textColor: Theme.of(context).primaryColor,
+                      onPressed: _presentDatePicker,
+                      child: Text(
+                        "Choose Date",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              RaisedButton(
+                onPressed: _submitData,
+                child: Text("Add Transaction"),
+                color: Theme.of(context).primaryColor,
+                textColor: Theme.of(context).textTheme.button.color,
+              ),
+            ],
+          ),
         ),
       ),
     );
