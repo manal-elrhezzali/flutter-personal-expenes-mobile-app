@@ -14,6 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expenses',
       theme: ThemeData(
+        // errorColor: Colors.red, //the errorColor is red by default
+        primarySwatch: Colors.purple,
         fontFamily: "Quicksand",
         textTheme: ThemeData.light().textTheme.copyWith(
               title: TextStyle(
@@ -32,7 +34,6 @@ class MyApp extends StatelessWidget {
                 button: TextStyle(color: Colors.white),
               ),
         ),
-        primarySwatch: Colors.purple,
       ),
       home: MyHomePage(),
     );
@@ -82,7 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount, DateTime chosenDate) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
       title: txTitle,
@@ -110,6 +112,17 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void _deleteTransaction(String id) {
+    setState(() {
+      // _userTransactions.removeWhere((tx) {
+      //   return tx.id == id;
+      // });
+      // Since the function only has one expression in its body, 
+      // we can use this shortcut instead 
+      _userTransactions.removeWhere((tx) => tx.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(_recentTransactions),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deleteTransaction),
             //moved to UserTransactions to manage them there
             //NewTransaction(),
             //TransactionList(),
