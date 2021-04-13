@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_expenses_app/models/transaction.dart';
+import '../models/transaction.dart';
 import 'package:intl/intl.dart';
 
 class TransactionItem extends StatelessWidget {
